@@ -1,0 +1,39 @@
+<%= content_for(:title, "Forgotten Password") %>
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="single">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2>Reset Password</h2>
+			<nav id="breadcrumbs">
+				<ul>
+					<li>You are here:</li>
+					<li><%= link_to "Home", root_url %></li>
+					<li><%= link_to "Login", login_url %></li>
+					<li>Forgotten Password</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+</div>
+<!-- Container -->
+<div class="container">
+
+	<div class="my-account">
+	<% flash.each do |key, value| %>
+		<p>
+			<div class="alert alert-success"><%= value %></div>
+		</p>
+	<% end %>
+	<%= form_tag user_password_reset_index_path, :method => :post do %>
+	  <div class="form-group">
+	    <%= label_tag :email, "Email Address" %>
+	    <%= text_field_tag :email,@redirValue, id: "email2" %>
+	  </div>
+	  <%= submit_tag "Reset Password",class: "button border fw margin-top-10" %>
+	<% end %>
+	</div>
+</div>

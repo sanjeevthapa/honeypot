@@ -1,0 +1,10 @@
+<%= content_for(:title, "User Verify") %>
+<p>
+<% flash.each do |key, value| %>
+				   <div class="alert alert-success"><%= value %></div>
+<% end %>
+</p>
+<div class="container-fluid">
+ <h2>Use the following link to login</h2>
+ <%= link_to "login", login_url %>
+</div>

@@ -1,0 +1,106 @@
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="single submit-page">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2><i class="fa fa-plus-circle"></i> Add Resume</h2>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+<div class="container">
+	
+	<!-- Submit Page -->
+	<div class="sixteen columns">
+		<div class="submit-page">
+
+			<!-- Notice -->
+			
+
+			<%= form_for @resume, url: user_add_resume_path(current_user.id) do |f| %>
+			<% if @resume.errors.any? %>
+			  
+			 <% @resume.errors.full_messages.each do |message| %>
+			    <%= message %>
+			  <% end %>
+			  <% end %>
+			  <% if @user.errors.any? %>
+			  
+			 <% @resume.errors.full_messages.each do |message| %>
+			    <%= message %>
+			  <% end %>
+			  <% end %>
+			  
+
+				<%= fields_for @user do |user|%>
+    
+					<!-- Name -->
+					<h5>First Name</h5>
+					<%= user.text_field :first_name, options = {placeholder: "Your first name",class: "search-field"} %>
+					<h5>Middle Name</h5>
+					<%= user.text_field :middle_name, options = {placeholder: "Your middle name(optional)",class: "search-field"} %>
+					<h5>Last Name</h5>
+					<%= user.text_field :last_name, options = {placeholder: "Your last name",class: "search-field"} %>
+					
+					<!-- Date of birth -->
+					<h5>Date Of Birth</h5>
+					<%= user.date_field :dob, class: "search-field", max: Date.today, min: 100.years.ago %>
+					
+					<!-- Mobile no -->
+					<h5>Mobile Number</h5>
+					<%= user.text_field :mobile, options = {placeholder: "9841765320",class: "search-field"} %>
+
+					<!-- Gender -->
+					<h5>Gender</h5>
+					<%= user.select(:gender, options_for_select(@genders.collect { |g| [g[0].humanize,g[0]]}, selected: @resume.user.gender), { include_blank: true, class: "search-field"})  %>
+
+					<!-- Title -->
+					<h5>Professional Title</h5>
+					<%= f.text_field :profession, options = {placeholder: "e.g. Web Developer",class: "search-field"  } %>
+
+					<!-- Location -->
+					<h5>Location</h5>
+					<%= user.text_field :location, options = {placeholder: "e.g. London, UK",class: "search-field"} %>
+
+
+					<!-- Description -->
+					<h5>Resume Content</h5>
+					<%= f.text_area :resume_content, cols: "40", rows: "3", class: "WYSIWYG", id: "summary" %>
+
+					<!-- Add Education -->
+					<h5> Add Education </h5>
+					<%= f.text_field :school_name, options = {placeholder: "School Name", class: "search-field"} %>
+					<%= f.text_field :qualification, options = {placeholder: "Qualification(s)", class: "search-field"} %>
+					Start Date
+					<%= f.date_field :education_start_date, class: "search-field", max: Date.today, min: 100.years.ago %>
+					End Date
+					<%= f.date_field :education_end_date, class: "search-field", max: Date.today, min: 100.years.ago %>
+					<%= f.text_area :education_note, options = {placeholder: "Notes (optional)", cols: "30", rows: "10", id: "desc"} %>
+					
+					<!-- Add Experience -->
+					<h5> Add Experience </h5>
+					<%= f.text_field :employer, options = {placeholder: "Employer", class: "search-field"} %>
+					<%= f.text_field :job_title, options = {placeholder: "Job Title", class: "search-field"} %>
+					<%= f.text_field :experience_institute, options = {placeholder: "Organization Name", class: "search-field"} %>
+					Start date
+					<%= f.date_field :experience_start_date, class: "search-field", max: Date.today, min: 100.years.ago %>
+					End date
+					<%= f.date_field :experience_end_date, class: "search-field", max: Date.today, min: 100.years.ago %>
+					<%= f.text_area :experience_note, options = {placeholder: "Notes (optional)", cols: "30", rows: "10", id: "desc1"} %>
+					<div class="divider margin-top-0 padding-reset"></div>
+					<%= f.submit "Change", class: "button big margin-top-5" %>
+					<% end %>
+
+
+			<% end %>
+
+		</div>
+	</div>
+
+</div>
+

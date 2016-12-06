@@ -1,0 +1,56 @@
+<%= content_for(:title, "Reset Password") %>
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="single">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2>Reset Password</h2>
+			<nav id="breadcrumbs">
+				<ul>
+					<li>You are here:</li>
+					<li><%= link_to "Home", root_url %></li>
+					<li>Forgotten Password</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+</div>
+
+<!-- Content
+================================================== -->
+
+<!-- Container -->
+<div class="container">
+
+	<div class="my-account">
+		<% flash.each do |key, value| %>
+		<p>
+			<div class="alert alert-success"><%= value %></div>
+		</p>
+		<% end %>
+		<%= form_for @user, :url => user_password_reset_path(params[:id]) do |f| %>
+			<% if @user.errors.any? %>
+			    <div class="alert alert-warning">
+			      <ul>
+			        <% for message in @user.errors.full_messages %>
+			          <li><%= message %></li>
+			        <% end %>
+			      </ul>
+			    </div>
+			<% end %>
+			<p class="form-row form-row-wide">
+		    <%= f.label :password %>
+		    <%= f.password_field :password, id: "password" %>
+		  	</p>
+			<p class="form-row form-row-wide">
+		    <%= f.label :password_confirmation %>
+		    <%= f.password_field :password_confirmation, id: "password" %>
+		  </p>
+		  <%= f.submit "Update Password",class: "button border fw margin-top-10" %>
+		<% end %>
+		</div>
+	</div>
+</div>

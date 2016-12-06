@@ -1,0 +1,132 @@
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="single">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2>Register</h2>
+			<nav id="breadcrumbs">
+				<ul>
+					<li>You are here:</li>
+					<li><%= link_to "Home", root_url %></li>
+					<li>Sign Up</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+
+<!-- Container -->
+<div class="container">
+
+	<div class="my-account">
+
+		
+
+		<div class="tabs-container">
+			<% flash.each do |key, value| %>
+			    <div class="alert alert-warning"><%= value %></div>
+			<% end %>
+				<%= form_for :user, url: signup_path, method: "post",html: { class: "register"} do |f| %>
+				<p class="form-row form-row-wide">
+				<%= f.label(:username) do %>
+				Username:<i class="ln ln-icon-Male"></i>
+			   <%= f.text_field :username , id: "username2" %>
+			   <% end %>
+			   </p>
+			  <% if @user.errors.include?(:username) %>
+			    <% name_errors = @user.errors[:username] %>
+
+			    <% if name_errors.kind_of?(Array) %>
+			      <% name_errors.each do |error| %>
+			        <div>Username <%= error %></div>
+			      <% end %>
+			        <% else %>
+				      <% error = name_errors %>
+				    <div>Username <%= error %></div>
+			    <% end %>
+			  <% end %>
+				<p class="form-row form-row-wide">
+				<%= f.label(:email) do %>
+				Email Address:<i class="ln ln-icon-Mail"></i>
+			   <%= f.text_field :email , id: "email2" %>
+			   <% end %>
+			   </p>
+			   <% if @user.errors.include?(:email) %>
+			    <% name_errors = @user.errors[:email] %>
+
+			    <% if name_errors.kind_of?(Array) %>
+			      <% name_errors.each do |error| %>
+			        <div>Email <%= error %></div>
+			      <% end %>
+			        <% else %>
+				      <% error = name_errors %>
+				    <div>Email <%= error %></div>
+			    <% end %>
+			  <% end %>
+				<p class="form-row form-row-wide">
+			   <%= f.label(:password) do %>
+			   Password:<i class="ln ln-icon-Lock-2"></i>
+			   <%= f.password_field :password , id: "password1" %>
+			   <% end %>
+			   </p>
+			   <% if @user.errors.include?(:password) %>
+			    <% name_errors = @user.errors[:password] %>
+
+			    <% if name_errors.kind_of?(Array) %>
+			      <% name_errors.each do |error| %>
+			        <div>Password <%= error %></div>
+			      <% end %>
+			        <% else %>
+				      <% error = name_errors %>
+				    <div>Password <%= error %></div>
+			    <% end %>
+			  <% end %>
+				<p class="form-row form-row-wide">
+			   <%= f.label(:password_confirmation) do %>
+			   Repeat Password:<i class="ln ln-icon-Lock-2"></i>
+			   <%= f.password_field :password_confirmation , id: "password2" %>
+			   <% end %>
+			   </p>
+			   <% if @user.errors.include?(:password_confirmation) %>
+			    <% name_errors = @user.errors[:password_confirmation] %>
+
+			    <% if name_errors.kind_of?(Array) %>
+			      <% name_errors.each do |error| %>
+			        <div>Password confirmation <%= error %></div>
+			      <% end %>
+			        <% else %>
+				      <% error = name_errors %>
+				    <div>Password confirmation <%= error %></div>
+			    <% end %>
+			  <% end %>
+				<p class="form-row">
+			   <%= f.check_box :terms, {class: "form-check-input"}  %>
+			   <%= f.label :terms do %>
+			   <a href="#">Accept our terms and conditions</a>
+			   <% end %>
+			   <% if @user.errors.include?(:terms) %>
+			    <% name_errors = @user.errors[:terms] %>
+
+			    <% if name_errors.kind_of?(Array) %>
+			      <% name_errors.each do |error| %>
+			        <div> <%= error %></div>
+			      <% end %>
+			        <% else %>
+				      <% error = name_errors %>
+				    <div> <%= error %></div>
+			    <% end %>
+			  <% end %>
+			  <%= f.submit "Register",class: "button border fw margin-top-10"  %>
+			  </p>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+

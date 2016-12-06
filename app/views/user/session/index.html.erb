@@ -1,0 +1,68 @@
+	<%= content_for(:title, "Jobportal Login") %>
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="single">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2>Login</h2>
+			<nav id="breadcrumbs">
+				<ul>
+					<li>You are here:</li>
+					<li><%= link_to "Home", root_url %></li>
+					<li>Log in</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+
+<!-- Container -->
+<div class="container">
+
+	<div class="my-account">
+
+
+			<!-- Login -->
+					<% flash.each do |key, value| %>
+				   <div class="alert alert-warning"><%= value %></div>
+				<% end %>
+				<%= form_tag url: "/login", method: "post",html: { id: "login"} do %>
+					<p class="form-row form-row-wide">
+					<%= label_tag(:email) do %>
+					Email Address:<i class="ln ln-icon-Male"></i>
+					<% if @redirValue %>
+					<% logger.info @redirValue.inspect %>
+				   		<%= text_field_tag :email ,"#{@redirValue}" %>
+					<% else %>
+				   		<%= text_field_tag :email %>
+				   <% end %>
+				   <% end %>
+				   </p>
+					<p class="form-row form-row-wide">
+				   <%= label_tag(:password ) do %>
+				   	Password:<i class="ln ln-icon-Lock-2"></i>
+				   <%= password_field_tag :password ,"", id: "password"  %>
+				   <% end %>
+				   </p>
+					<p class="form-row">
+				  <%= submit_tag "Login",class: "button btn", id: "signButton" %>
+				   <%= check_box_tag :remember_me, 1, params[:remember_me],id: "rememberme" %>
+				  <%= label_tag "remember_me", "Remember Me" ,id: "rememberme" %>
+				  </p>
+					<p class="lost_password">
+					<%= link_to "Lost Your Password?", user_password_reset_index_path %>
+				</p>
+				<% end %>
+
+	</div>
+</div>
+
+
+
+
